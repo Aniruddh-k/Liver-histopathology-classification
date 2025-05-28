@@ -60,7 +60,7 @@ This repository presents a deep learning approach for the **automated classifica
 
 ### 🔹 Loss per Epoch
 
-![Loss Curve](outputs/Loss.png)
+![Loss Curve](outputs/30_loss.png)
 
 ---
 
