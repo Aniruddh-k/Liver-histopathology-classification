@@ -84,7 +84,7 @@ This repository presents a deep learning approach for the **automated classifica
 
 Grad-CAM was used for interpretability to show where the model focuses during prediction.
 
-![Grad-CAM for Class 0](assets/gradcam.png)
+![Grad-CAM for Class 0](outputs/Gradcam.png)
 
 *(Add more Grad-CAM visualizations for other classes as needed)*
 
