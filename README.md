@@ -94,7 +94,7 @@ Grad-CAM was used for interpretability to show where the model focuses during pr
 
 A demo web interface for uploading and classifying liver fibrosis images.
 
-![Web App UI](assets/web_ui.png)
+![Web App UI](outputs/web_prev.png)
 
 *(You can add screenshots of Streamlit or web deployment here)*
 
