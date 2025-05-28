@@ -66,20 +66,6 @@ This repository presents a deep learning approach for the **automated classifica
 
 ---
 
-## 🔍 ROC & Precision–Recall Curves
-
-### ROC Curve
-*(Insert class-wise ROC curves)*
-
-![ROC Curve](assets/roc_curve.png)
-
-### Precision–Recall Curve
-*(Insert PR curve if applicable)*
-
-![PR Curve](assets/precision_recall.png)
-
----
-
 ## 🔥 Grad-CAM Visualizations
 
 Grad-CAM was used for interpretability to show where the model focuses during prediction.
