@@ -60,7 +60,7 @@ This repository presents a deep learning approach for the **automated classifica
 ### 🔹 Accuracy per Epoch
 *(Insert training/validation accuracy curve below)*
 
-![Accuracy Curve](assets/accuracy_curve.png)
+![Accuracy Curve](outputs/accuracy.png)
 
 ### 🔹 Loss per Epoch
 *(Insert training/validation loss curve below)*
