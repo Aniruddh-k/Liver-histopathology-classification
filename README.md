@@ -24,9 +24,6 @@ This repository presents a deep learning approach for the **automated classifica
 | **Macro F1-Score**         | 0.91            |
 | **Matthews Corr. Coeff.**  | 0.9036          |
 | **AUC-ROC (Class-wise)**   | 0.95–1.00       |
-| **Classification Report**  | See below       |
-
-
 ---
 
 ## 🧪 Dataset & Preprocessing
@@ -65,7 +62,7 @@ This repository presents a deep learning approach for the **automated classifica
 ### 🔹 Loss per Epoch
 *(Insert training/validation loss curve below)*
 
-![Loss Curve](outputs/loss (1).png)
+![Loss Curve](outputs/Loss(1).png)
 
 ---
 
