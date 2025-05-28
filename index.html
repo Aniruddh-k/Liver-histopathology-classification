@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liver Fibrosis Classification System</title>
+    <link rel="stylesheet" href="src/output.css">
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen">
+  <!-- Header -->
+  <header class="bg-white/80 backdrop-blur-sm shadow-lg border-b border-gradient-to-r from-medical-200 to-purple-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-6">
+        <div class="flex items-center">
+          <div class="ml-4">
+            <h1
+              class="text-3xl font-bold bg-gradient-to-r from-medical-700 to-purple-700 bg-clip-text text-transparent">
+              Liver Fibrosis Classification
+            </h1>
+            <p class="text-sm text-medical-600 font-medium">AI-Powered Ultrasound Analysis System</p>
+          </div>
+        </div>
+    <div class="mb-6 flex items-center justify-end">
+      <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg">
+        <div class="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></div>
+        System Online
+      </span>
+    </div>
+      </div>
+    </div>
+  </header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Error Messages -->
+  <div id="apiError" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-8" role="alert">
+    <span class="font-bold">Error:</span> <span id="errorMessage"></span>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Upload Section -->
+    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-medical-200">
+      <div class="p-8">
+        <div class="flex items-center mb-6">
+          <div
+            class="h-8 w-8 bg-gradient-to-r from-medical-500 to-purple-500 rounded-lg flex items-center justify-center mr-3">
+            <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold text-medical-800">Upload Ultrasound Image</h2>
+        </div>
+
+        <!-- Upload Area -->
+        <div id="uploadArea"
+          class="border-3 border-dashed border-medical-300 rounded-2xl p-10 text-center hover:border-medical-400 hover:bg-gradient-to-br hover:from-medical-50 hover:to-purple-50 transition-all duration-300 cursor-pointer group"
+          tabindex="0" role="button" aria-label="Click or drag and drop to upload an image">
+          <div
+            class="bg-gradient-to-br from-medical-100 to-purple-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+            <svg class="h-10 w-10 text-medical-600" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+              <path
+                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div class="mt-4">
+            <p class="text-lg text-medical-700 font-semibold">
+              <span class="bg-gradient-to-r from-medical-600 to-purple-600 bg-clip-text text-transparent">Click to
+                upload</span> or drag and drop
+            </p>
+            <p class="text-sm text-medical-500 mt-2 font-medium">PNG, JPG, JPEG up to 10MB</p>
+          </div>
+          <input type="file" id="imageInput" class="hidden" accept="image/*" />
+        </div>
+
+        <!-- Preview Image -->
+        <div id="imagePreview" class="mt-8 hidden" aria-live="polite">
+          <h3 class="text-lg font-bold text-medical-800 mb-4 flex items-center">
+            <div class="w-3 h-3 bg-gradient-to-r from-success-400 to-success-600 rounded-full mr-2"></div>
+            Original Image
+          </h3>
+          <div class="border-2 border-medical-200 rounded-2xl overflow-hidden shadow-lg">
+            <img id="previewImg" class="w-full h-80 object-contain bg-gradient-to-br from-slate-50 to-slate-100"
+              alt="Uploaded ultrasound" loading="lazy" />
+          </div>
+        </div>
+
+        <!-- Analyze Button -->
+        <button id="analyzeBtn"
+        class="w-full mt-8 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all duration-300 shadow-xl">
+          <span id="analyzeText">🔬 Analyze Image</span>
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+<!-- Results Section -->
+<div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-medical-200">
+  <div class="p-8">
+
+    <!-- Grad-CAM Visualization -->
+
+  
+<!-- Update the Fibrosis Scale Container section -->
+<div class="mt-8 bg-gray-50 rounded-lg p-6 border border-medical-100">
+  <h3 class="text-lg font-bold text-medical-800 mb-4">Fibrosis Results</h3>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <!-- F0 -->
+    <div class="fibrosis-scale-item F0 flex items-center rounded-xl p-3 bg-white shadow-sm transition-all duration-300">
+      <div class="fibrosis-badge F0 w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white font-bold text-sm mr-3">
+        F0
+      </div>
+      <p class="fibrosis-label F0 text-sm font-semibold text-gray-700">No Fibrosis</p>
+    </div>
+    
+    <!-- F1 -->
+    <div class="fibrosis-scale-item F1 flex items-center rounded-xl p-3 bg-white shadow-sm transition-all duration-300">
+      <div class="fibrosis-badge F1 w-8 h-8 rounded-full bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white font-bold text-sm mr-3">
+        F1
+      </div>
+      <p class="fibrosis-label F1 text-sm font-semibold text-gray-700">Mild Fibrosis</p>
+    </div>
+
+    <!-- F2 -->
+    <div class="fibrosis-scale-item F2 flex items-center rounded-xl p-3 bg-white shadow-sm transition-all duration-300">
+      <div class="fibrosis-badge F2 w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-sm mr-3">
+        F2
+      </div>
+      <p class="fibrosis-label F2 text-sm font-semibold text-gray-700">Moderate Fibrosis</p>
+    </div>
+
+    <!-- F3 -->
+    <div class="fibrosis-scale-item F3 flex items-center rounded-xl p-3 bg-white shadow-sm transition-all duration-300">
+      <div class="fibrosis-badge F3 w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white font-bold text-sm mr-3">
+        F3
+      </div>
+      <p class="fibrosis-label F3 text-sm font-semibold text-gray-700">Severe Fibrosis</p>
+    </div>
+
+    <!-- F4 -->
+    <div class="fibrosis-scale-item F4 flex items-center rounded-xl p-3 bg-white shadow-sm transition-all duration-300">
+      <div class="fibrosis-badge F4 w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm mr-3">
+        F4
+      </div>
+      <p class="fibrosis-label F4 text-sm font-semibold text-gray-700">Cirrhosis</p>
+    </div>
+    </div>
+    </div>
+    <div class="mt-8">
+      <h3 class="text-lg font-bold text-medical-800 mb-4">Activation Map</h3>
+      <div class="border-2 border-medical-200 rounded-2xl overflow-hidden shadow-lg">
+        <img id="gradcamImg" class="w-full h-80 object-contain bg-gradient-to-br from-slate-50 to-slate-100" 
+             alt="Grad-CAM visualization" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+
+<script>
+const uploadArea = document.getElementById('uploadArea');
+const imageInput = document.getElementById('imageInput');
+const imagePreview = document.getElementById('imagePreview');
+const previewImg = document.getElementById('previewImg');
+const analyzeBtn = document.getElementById('analyzeBtn');
+const analyzeText = document.getElementById('analyzeText');
+const predictedClass = document.getElementById('predictedClass');
+const gradcamImg = document.getElementById('gradcamImg');
+const apiError = document.getElementById('apiError');
+
+// File Upload Handling
+uploadArea.addEventListener('click', () => imageInput.click());
+uploadArea.addEventListener('dragover', handleDragOver);
+uploadArea.addEventListener('dragleave', handleDragLeave);
+uploadArea.addEventListener('drop', handleDrop);
+imageInput.addEventListener('change', handleFileSelect);
+
+function handleDragOver(e) {
+    e.preventDefault();
+    uploadArea.classList.add('border-medical-400', 'bg-gradient-to-br', 'from-medical-50', 'to-purple-50', 'scale-105');
+}
+
+function handleDragLeave(e) {
+    e.preventDefault();
+    uploadArea.classList.remove('border-medical-400', 'bg-gradient-to-br', 'from-medical-50', 'to-purple-50', 'scale-105');
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    handleDragLeave(e);
+    if (e.dataTransfer.files.length > 0) {
+        handleFileUpload(e.dataTransfer.files[0]);
+    }
+}
+
+function handleFileSelect(e) {
+    if (e.target.files.length > 0) {
+        handleFileUpload(e.target.files[0]);
+    }
+}
+
+function handleFileUpload(file) {
+    if (!file.type.match(/image\/(jpeg|png|jpg)/i)) {
+        showError('Please upload a valid image file (PNG, JPG, JPEG)');
+        updateButtonState(false);
+        return;
+    }
+    
+    if (file.size > 10 * 1024 * 1024) {
+        showError('File size exceeds 10MB limit');
+        updateButtonState(false);
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        previewImg.src = e.target.result;
+        imagePreview.classList.remove('hidden');
+        updateButtonState(true);
+        apiError.classList.add('hidden');
+    };
+    reader.readAsDataURL(file);
+}
+
+// Analysis Handling
+analyzeBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if (analyzeBtn.disabled) return;
+
+    try {
+        toggleLoadingState(true);
+        const formData = new FormData();
+        formData.append('file', imageInput.files[0]);
+
+        const response = await fetch('http://127.0.0.1:8000/predict/', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`API Error: ${errorText}`);
+        }
+
+        const result = await response.json();
+        displayResults(result);
+        apiError.classList.add('hidden');
+    } catch (error) {
+        showError(error.message);
+    } finally {
+        toggleLoadingState(false);
+    }
+});
+
+function toggleLoadingState(isLoading) {
+    analyzeBtn.disabled = isLoading;
+    analyzeText.textContent = isLoading ? '🔄 Analyzing...' : '🔬 Analyze Image';
+    analyzeBtn.style.pointerEvents = isLoading ? 'none' : 'auto';
+}
+
+function displayResults(result) {
+    // Remove this line
+    // predictedClass.textContent = `F${result.predicted_class}`;
+    
+    // Update gradcam image
+    gradcamImg.src = result.gradcam_image;
+
+    // Update scale highlights
+document.querySelectorAll('.fibrosis-scale-item').forEach(item => {
+        item.classList.remove(
+            'ring-4', 
+            'ring-purple-400',
+            'bg-gradient-to-br',
+            'from-purple-100',
+            'to-blue-100',
+            'scale-105'
+        );
+        item.querySelector('.fibrosis-label').classList.remove(
+            'text-purple-800',
+            'font-bold'
+        );
+    });
+    
+    const activeItem = document.querySelector(`.F${result.predicted_class}`);
+    activeItem.classList.add(
+        'ring-4',
+        'ring-purple-400',
+        'bg-gradient-to-br',
+        'from-purple-50',
+        'to-blue-50',
+        'scale-105'
+    );
+    activeItem.querySelector('.fibrosis-label').classList.add(
+        'text-purple-800',
+        'font-bold'
+    );
+}
+
+function updateButtonState(hasValidFile) {
+    if (hasValidFile) {
+        analyzeBtn.classList.remove('opacity-0', 'translate-y-4');
+        analyzeBtn.classList.add('opacity-100', 'translate-y-0');
+        analyzeBtn.disabled = false;
+        analyzeBtn.style.pointerEvents = 'auto';
+    } else {
+        analyzeBtn.classList.add('opacity-0', 'translate-y-4');
+        analyzeBtn.classList.remove('opacity-100', 'translate-y-0');
+        analyzeBtn.disabled = true;
+        analyzeBtn.style.pointerEvents = 'none';
+    }
+}
+
+function showError(message) {
+    apiError.classList.remove('hidden');
+    document.getElementById('errorMessage').textContent = message;
+    imagePreview.classList.add('hidden');
+    updateButtonState(false);
+}
+
+// Initialize button state
+document.addEventListener('DOMContentLoaded', () => {
+    updateButtonState(false);
+});
+</script>
+</body>
+</html>

@@ -12,8 +12,17 @@ from albumentations.pytorch import ToTensorV2
 from pytorch_grad_cam import GradCAM
 from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 from pytorch_grad_cam.utils.image import show_cam_on_image
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # For development only, restrict in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # --- CBAM Modules ---
 class ChannelAttention(nn.Module):
@@ -117,5 +126,5 @@ async def predict(file: UploadFile = File(...)):
 
     return JSONResponse(content={
         "predicted_class": int(pred_class),
-        "gradcam_image_base64": img_str
+        "gradcam_image": f"data:image/jpeg;base64,{img_str}"
     })
