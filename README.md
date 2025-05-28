@@ -55,12 +55,10 @@ This repository presents a deep learning approach for the **automated classifica
 ## 📈 Training Curves
 
 ### 🔹 Accuracy per Epoch
-*(Insert training/validation accuracy curve below)*
 
 ![Accuracy Curve](outputs/accuracy.png)
 
 ### 🔹 Loss per Epoch
-*(Insert training/validation loss curve below)*
 
 ![Loss Curve](outputs/Loss.png)
 
@@ -72,7 +70,6 @@ Grad-CAM was used for interpretability to show where the model focuses during pr
 
 ![Grad-CAM for Class 0](outputs/Gradcam.png)
 
-*(Add more Grad-CAM visualizations for other classes as needed)*
 
 ---
 
@@ -82,7 +79,6 @@ A demo web interface for uploading and classifying liver fibrosis images.
 
 ![Web App UI](outputs/web_prev.png)
 
-*(You can add screenshots of Streamlit or web deployment here)*
 
 ---
 
