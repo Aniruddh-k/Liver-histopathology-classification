@@ -1,0 +1,12 @@
+torch==2.1.0
+torchvision==0.16.0
+timm==0.9.12
+numpy==1.24.4
+Pillow==10.2.0
+opencv-python-headless==4.9.0.80
+albumentations==1.4.3
+fastapi==0.110.0
+uvicorn==0.29.0
+pytorch-grad-cam==1.4.0
+starlette==0.36.3
+python-multipart==0.0.9
