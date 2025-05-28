@@ -86,7 +86,7 @@ A demo web interface for uploading and classifying liver fibrosis images.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/liver-fibrosis-classification.git
+git clone https://github.com/Aniruddh-k/liver-fibrosis-classification.git
 cd liver-fibrosis-classification
 
 # Create a virtual environment (optional but recommended)
