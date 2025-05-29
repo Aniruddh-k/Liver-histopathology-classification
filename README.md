@@ -28,7 +28,7 @@ This repository presents a deep learning approach for the **automated classifica
 
 ## 🧪 Dataset & Preprocessing
 
-- **Source:** *(Mention dataset source here, e.g. private hospital, Kaggle, etc.)*
+- **Source:** https://www.kaggle.com/datasets/vibhingupta028/liver-histopathology-fibrosis-ultrasound-images
 - **Number of Classes:** 5 (F0, F1, F2, F3, F4)
 - **Image Size:** 224×224
 - **Augmentations:**
@@ -43,7 +43,7 @@ This repository presents a deep learning approach for the **automated classifica
 
 ## 🏗️ Model Architecture
 
-- **Backbone:** Custom CNN / ResNet / EfficientNet *(mention actual one used)*
+- **Backbone:**  EfficientNet-b4 *(mention actual one used)*
 - **Loss Function:** CrossEntropyLoss
 - **Optimizer:** Adam
 - **Scheduler:** StepLR
