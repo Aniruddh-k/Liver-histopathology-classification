@@ -84,7 +84,7 @@ class EfficientNetCBAM(nn.Module):
 # --- Load Model ---
 device = torch.device("cpu")
 model = EfficientNetCBAM(num_classes=5)
-model.load_state_dict(torch.load(r"D:\Liver-Fiberosis\model\efficientnet_cbam_fibrosis_aug.pth", map_location=device))
+model.load_state_dict(torch.load(r"/workspaces/Liver-histopathology-classification/model/efficientnet_cbam_fibrosis_aug.pth", map_location=device))
 model.to(device).eval()
 
 # --- Transform ---
