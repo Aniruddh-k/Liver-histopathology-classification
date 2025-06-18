@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.tmp
+*.log
+*.sqlite3
+*.pth
+venv/
+env/
+.DS_Store
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.mp4
+*.avi
+model/  # Optional: if the model will be mounted via volume or downloaded
+*.pth
+.idea/
+.vscode/
+*.ipynb
